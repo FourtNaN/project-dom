@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Prompt", sans-serif;
+  font-style: normal;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+.room-button {
+  display: inline-block; /* ทำให้ปุ่มเรียงกันในแถว */
+  width: 250px; /* ความกว้างของปุ่ม */
+  height: 200px; /* ความสูงของปุ่ม */
+  text-align: center; /* จัดข้อความให้อยู่กลาง */
+  margin: 10px; /* ระยะห่างระหว่างปุ่ม */
+  color: white; /* สีตัวอักษร */
+  text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+  border-radius: 10px; /* มุมโค้ง */
+  font-size: 20px; /* ขนาดตัวอักษร */
+  transition: background-color 0.3s, transform 0.3s; /* เพิ่มการเปลี่ยนแปลงในพื้นหลังและการขยาย */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับปุ่ม */
+}
+.room-button:hover {
+  transform: scale(1.05); /* ขยายปุ่มเมื่อวางเมาส์ */
+}
+.green {
+  background-color: green; /* สีพื้นหลังสำหรับสถานะว่าง */
+}
+
+.yellow {
+  background-color: yellow; /* สีพื้นหลังสำหรับสถานะจอง */
+}
+
+.red {
+  background-color: red; /* สีพื้นหลังสำหรับสถานะไม่ว่าง */
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+/* .sidebar-header {
+  display: flex;
+  align-items: center;
+}
+.sidebar-header-h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-left: 23px;
+} */
+/* .sidebar-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0 20px;
+  color: #fff;
+  font-weight: 500;
+  padding: 15px 20px;
+  white-space: nowrap;
+  text-decoration: none;
+} */
+.sidebar-links li a:hover {
+  background: #4e5d88; /* ใช้ rgba แทน O#ffffff2d */
+  color: #fff; /* สีข้อความเมื่อ hover */
+  border-radius: 4px; /* มุมโค้ง */
+}
+.custom-color-1 {
+  background-color: #4e5d88; /* Dark Slate Blue */
+}
+
+.custom-color-2 {
+  background-color: #8fccd8; /* Light Blue */
+}
+
+.custom-color-3 {
+  background-color: #d8d5e6; /* Lavender */
+}
+
+.custom-color-4 {
+  background-color: #84bfcd; /* Light Cyan */
+}
+
+.custom-color-5 {
+  background-color: #3d73af; /* Steel Blue */
+}
+
+.custom-color-6 {
+  background-color: #d2c7e7; /* Pale Lavender */
+}
+.text-custom-1 {
+  color: #4e5d88; /* Dark Slate Blue */
+}
+
+.text-custom-2 {
+  color: #8fccd8; /* Light Blue */
+}
+
+.text-custom-3 {
+  color: #d8d5e6; /* Lavender */
+}
+
+.text-custom-4 {
+  color: #84bfcd; /* Light Cyan */
+}
+
+.text-custom-5 {
+  color: #3d73af; /* Steel Blue */
+}
+
+.text-custom-6 {
+  color: #d2c7e7; /* Pale Lavender */
+}
+.custom-line {
+  border: none; /* ไม่ให้มีเส้นขอบทั่วไป */
+  border-top: 2px solid #3d73af; /* เส้นแบ่งที่ด้านบน */
+  margin: 20px 0; /* กำหนดระยะห่างบนและล่าง */
+  color: #3d73af;
+}
+.btn-custom {
+  background-color: #4e5d88; /* สีพื้นหลัง */
+  color: #ffffff; /* สีข้อความ */
+  border: none; /* ไม่มีขอบ */
+}
+
+.btn-custom:hover {
+  background-color: #3b4768; /* สีพื้นหลังเมื่อ hover */
+  color: #ffffff; /* สีข้อความเมื่อ hover */
+}
+
+.btn-custom:focus {
+  box-shadow: 0 0 0 0.2rem rgba(78, 93, 136, 0.5); /* เงาเมื่อ focus */
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+.prompt-thin {
+  font-family: "Prompt", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.prompt-extralight {
+  font-family: "Prompt", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.prompt-light {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.prompt-regular {
+  font-family: "Prompt", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.prompt-medium {
+  font-family: "Prompt", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.prompt-semibold {
+  font-family: "Prompt", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.prompt-bold {
+  font-family: "Prompt", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.prompt-extrabold {
+  font-family: "Prompt", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.prompt-black {
+  font-family: "Prompt", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.prompt-thin-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.prompt-extralight-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.prompt-light-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.prompt-regular-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.prompt-medium-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.prompt-semibold-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.prompt-bold-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.prompt-extrabold-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.prompt-black-italic {
+  font-family: "Prompt", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+.border-custom {
+  border: 1px solid #4e5d88; /* กำหนดสีของ border */
+}
+.dashboard {
+  width: 80%;
+  height: 60%;
+  position: relative;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+input {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  width: 50%;
+  text-align: center;
+}
+.custom-font-size-head {
+  font-size: 50px; /* กำหนดขนาดตัวอักษรเป็น 36 พิกเซล */
+}
+.lightest-color {
+  background-color: rgba(143, 204, 216, 0.1); /* สีอ่อนที่สุด */
+}
