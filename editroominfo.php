@@ -59,7 +59,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">เอกสารสัญญา</label>
-                                <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*">
                             </div>
                             <div class="d-flex justify-content-end align-items-end mt-3">
                                 <input type="submit" value="อัปเดตข้อมูล" class="btn btn-primary me-2 w-25">
