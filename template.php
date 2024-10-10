@@ -21,5 +21,6 @@
     <?php include("aside.php"); ?>
     <main class="col-9 col-xl-10 border border-5 bg-white">
 
+
     </main>
   </section>

@@ -52,8 +52,9 @@
             }
             if ($result->num_rows > 0) {
                 for ($floor = 1; $floor <= 8; $floor++) {
-                    echo "<h2>ชั้นที่ " . $floor . "</h2>";
-                    echo "<hr>";
+                    echo "<div class='floor-heading text-center'>";
+                    echo "<h2 class='m-3 fs-1' style='color: #3d73af; font-weight: bold; display: inline-block; border-bottom: 3px solid #007BFF;'>ชั้นที่ " . $floor . "</h2>";
+                    echo "</div>";
                     for ($room = 1; $room <= 23; $room++) {
                         $room_number = sprintf("%d%02d", $floor, $room);
 

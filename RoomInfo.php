@@ -21,15 +21,13 @@
 
         <?php include("aside.php"); ?>
 
-        <main class="col-9 col-xl-10 bg-white border border-5">
-
-
+        <main class="col-9 col-xl-10 bg-white border border-5 ">
             <?php
-
             $room_number = $_GET['room_number'];
 
-            if (isset($_GET['message']) && $_GET['message'] == 'update_success') {
-                echo '<div class="alert alert-success" role="alert"> แก้ไขข้อมูลเรียบร้อยแล้ว !! </div>';
+            if (isset($_GET['message']) && $_GET['message'] == 'update_success') { ?>
+                <div id="myAlert" class='alert alert-success text-center'>! ! ! แก้ไขข้อมูลเรียบร้อยแล้ว ! ! !</div>
+                <?php
             }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $status = $_POST['status'];
@@ -38,7 +36,7 @@
                 $update_sql = "UPDATE rooms SET status = '$status' WHERE room_number = '$room_number'";
                 if ($conn->query($update_sql) === TRUE) { ?>
 
-                    <div id="myAlert" class='alert alert-success text-center'>!!! อัปเดตสถานะเรียบร้อยแล้ว !!!</div>
+                    <div id="myAlert" class='alert alert-success text-center'>! ! ! อัปเดตสถานะเรียบร้อยแล้ว ! ! !</div>
 
                 <?php
                 } else {
@@ -55,7 +53,7 @@
 
             if ($result->num_rows > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $imageData = base64_encode($row['image']);
+                    $imageData = base64_encode($row['contract']);
                 ?><div class="bg-white border border-1">
                         <div class="d-flex justify-content-center p-5">
                             <h1 class="text-custom-5 text-center custom-font-size-head">ห้อง <?php echo $row['room_number']; ?></h1>
@@ -79,36 +77,63 @@
                         <div class="mx-5 p-1">
                             <p class="mx-5 p-1 text-custom-1 fs-5">
                                 <span class="fw-bold p-lg-5">เบอร์โทรศัพท์ :</span>
-                                <span><?php echo $row['phone_number']; ?></span>
+                                <span>
+                                    <?php
+                                    $phoneNumber = $row['phone_number'];
+                                    $formattedNumber = substr($phoneNumber, 0, 3) . '-' . substr($phoneNumber, 3, 3) . '-' . substr($phoneNumber, 6);
+                                    echo $formattedNumber;
+                                    ?>
+                                </span>
                             </p>
                         </div>
 
                         <div class="mx-5 p-1">
                             <p class="mx-5 p-1 text-custom-1 fs-5">
                                 <span class="fw-bold p-lg-5">เลขบัตรประจำตัวประชาชน :</span>
-                                <span><?php echo $row['id_card_number']; ?></span>
+                                <span>
+                                    <?php
+                                    $idCardNumber = $row['id_card_number'];
+                                    $formattedIdCardNumber = substr($idCardNumber, 0, 1) . '-' .
+                                        substr($idCardNumber, 1, 4) . '-' .
+                                        substr($idCardNumber, 5, 5) . '-' .
+                                        substr($idCardNumber, 10, 2) . '-' .
+                                        substr($idCardNumber, 12);
+                                    echo $formattedIdCardNumber;
+                                    ?>
+                                </span>
                             </p>
                         </div>
+                        <div class="mx-5 p-1">
+                            <p class="mx-5 p-1 text-custom-1 fs-5">
+                                <span class="fw-bold p-lg-5">ที่อยู่ :</span>
+                                <span><?php echo $row['address_add']; ?></span>
+                            </p>
+                        </div>
+
                         <div class="mx-5 p-1">
                             <p class="mx-5 p-1 text-custom-1 fs-5">
                                 <span class="fw-bold p-lg-5">วันที่เริ่มเข้า :</span>
                                 <span><?php echo $row['start_date']; ?></span>
                             </p>
                         </div>
+
                         <div class="mb-3">
                             <p class="mx-5 p-1 text-custom-1 fs-5">
                                 <span class="fw-bold p-lg-5">สัญญาการเข้าพัก :</span>
                                 <img src="data:image/jpeg;base64,<?php echo $imageData; ?>" alt="Room Image" style="max-width: 100%; height: auto;" />
                         </div>
+
                         <div class="mx-5 p-1">
                             <p class="mx-5 p-1 text-custom-1 fs-5">
                                 <span class="fw-bold p-lg-5">หมายเหตุ :</span>
                                 <span><?php echo $row['notes']; ?></span>
                             </p>
                         </div>
+
                         <div>
                             <div class="prompt-semibold mx-5 p-5 fs-5 text-decoration-underline">ข้อมูลห้อง</div>
                         </div>
+
                         <div>
                             <div class="mx-5 p-1 d-flex align-items-center justify-content-between">
 
@@ -124,7 +149,6 @@
                                     <span class="fw-bold p-lg-5">สถานะของห้อง :</span>
                                     <span>
                                         <?php
-
                                         switch ($row['status']) {
                                             case 'available':
                                                 $btnClass = 'btn btn-success';
@@ -137,6 +161,10 @@
                                             case 'unavailable':
                                                 $btnClass = 'btn btn-danger';
                                                 $btnText = 'ห้องไม่ว่าง';
+                                                break;
+                                            case 'out of service':
+                                                $btnClass = 'btn btn-secondary';
+                                                $btnText = 'ห้องไม่พร้อมให้ใช้งาน';
                                                 break;
                                             default:
                                                 $btnClass = 'btn btn-secondary';
@@ -154,39 +182,44 @@
                                 <option value="available" <?php if ($row['status'] == 'available') echo 'selected'; ?>>ห้องว่าง</option>
                                 <option value="booked" <?php if ($row['status'] == 'booked') echo 'selected'; ?>>ห้องถูกจอง</option>
                                 <option value="unavailable" <?php if ($row['status'] == 'unavailable') echo 'selected'; ?>>ห้องเต็ม</option>
+                                <option value="out of service" <?php if ($row['status'] == 'out of service') echo 'selected'; ?>>ห้องไม่พร้อมให้ใช้งาน</option>
                             </select>
                         </form>
                         <div class="d-flex justify-content-end">
-                            <a href='editroominfo.php?room_number=<?php echo $row['room_number']; ?>' class='btn btn-warning m-5'>แก้ไขข้อมูล</a>
+                            <a href='editroominfo.php?room_number=<?php echo $row['room_number']; ?>' class='btn btn-warning btn-lg m-5'>แก้ไขข้อมูล</a>
                         </div>
                     </div>
+                    <?php include 'footer.php' ?>
                 <?php }
-            } else { ?>
-                <div class=" alert alert-danger text-center mt-3" role="alert">
-                    ! ! ! ไม่มีข้อมูลห้อง ! ! !
+            } else {
+                $row = mysqli_fetch_assoc($result) ?>
+
+                <div class=" alert alert-danger text-center mt-5" role="alert">
+                    ! ! ! ไม่มีข้อมูลห้อง <?php echo $room_number; ?> ! ! !
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="w-100 ml-5 mt-5 pt-5 p-3">
-                    <a href="insertForm.php?room_number=<?php echo $room_number; ?>" class="btn btn-danger mt-5 mb-5 ml-5 w-100 p-4">กรอกข้อมูลสำหรับห้อง <?php echo $room_number; ?></a>
+
+                <form method="post" id="statusForm" class="mt-5 pt-5">
+                    <label for="status" class="form-label text-center">สถานะของห้อง</label>
+                    <select name="status" id="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                        <option value="available">ห้องว่าง</option>
+                        <option value="booked">ห้องถูกจอง</option>
+                        <option value="unavailable">ห้องเต็ม</option>
+                        <option value="out of service">ห้องไม่พร้อมให้ใช้งาน</option>
+                    </select>
+                </form>
+                <div class="d-flex justify-content-end align-items-end flex-column" style="position: absolute; bottom: 20px; right: 20px;">
+                    <div class="w-100 p-3">
+                        <a href="index.php" class="btn btn-success w-100 p-4">กลับหน้าแรก</a>
+                    </div>
+                    <div class="w-100 p-3">
+                        <a href="insertForm.php?room_number=<?php echo $room_number; ?>" class="btn btn-danger w-100 p-4">กรอกข้อมูลสำหรับห้อง <?php echo $room_number; ?></a>
+                    </div>
                 </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
+
             <?php } ?>
 
             <?php $conn->close();
-            include 'footer.php' ?>
+            ?>
             <script>
                 setTimeout(function() {
                     var alert = document.getElementById('myAlert');

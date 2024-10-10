@@ -135,7 +135,6 @@
 
                     <!-- ปุ่มขวาบน -->
                     <a href="/billinfoTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10" style="width: 150px;">
-
                         ตารางบิล
                         <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </a>

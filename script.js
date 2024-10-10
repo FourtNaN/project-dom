@@ -1,21 +1,22 @@
-fetch("/chart.php")
+fetch("/chart.php") // ดึงข้อมูลจาก chart.php
   .then((response) => {
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
-    return response.json();
+    return response.json(); // แปลงเป็น JSON
   })
   .then((data) => {
+    console.log(data);
     const ctx = document.getElementById("expenseChart").getContext("2d");
 
     const expenseChart = new Chart(ctx, {
-      type: "line",
+      type: "line", // ประเภทกราฟ
       data: {
-        labels: data.months, // เดือน
+        labels: data.months, // เดือนที่ดึงจากฐานข้อมูล หรือเดือนเริ่มต้น
         datasets: [
           {
-            label: "Monthly Billing", // ชื่อของกราฟ
-            data: data.totalBillings, // ข้อมูลที่แสดง
+            label: "บิลรายเดือน", // ชื่อกราฟ
+            data: data.totalBillings, // ยอดใช้จ่ายจากฐานข้อมูล หรือข้อมูลเริ่มต้น
             fill: true,
             backgroundColor: "rgba(75, 192, 192, 0.2)",
             borderColor: "rgba(75, 192, 192, 1)",
@@ -26,7 +27,7 @@ fetch("/chart.php")
       options: {
         scales: {
           y: {
-            beginAtZero: true,
+            beginAtZero: true, // ให้แกน Y เริ่มจาก 0
           },
         },
       },

@@ -133,15 +133,14 @@
                     </a>
 
                     <!-- ปุ่มขวาบน -->
-                    <a href="/problemTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10" style="width: 150px;">
-
-                        ตารางแจ้งปัญหา
+                    <a href="/monthlybilltable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10" style="width: 150px;">
+                        บิลรายเดือน
                         <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </a>
                 </div>
 
                 <h1 class="prompt-bold text-custom-1 text-center">ห้องพัก</h1>
-                <!-- สร้างตาราง -->
+
                 <table id="billingTable" class="display ">
                     <thead>
                         <tr>
@@ -170,6 +169,10 @@
                                             break;
                                         case 'booked':
                                             $statusClass = 'btn btn-warning text-white';
+                                            $style = 'style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; "';
+                                            break;
+                                        case 'out of service':
+                                            $statusClass = 'btn btn-secondary text-white';
                                             $style = 'style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; "';
                                             break;
                                     }

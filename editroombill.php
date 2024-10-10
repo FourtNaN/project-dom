@@ -112,7 +112,7 @@
                     <input type="number" step="0.01" id="room_cost" name="room_cost" value="<?php echo $bill['room_cost']; ?>" required>
 
                     <label for="other_cost">ค่าใช้จ่ายอื่นๆ (บาท) :</label>
-                    <input type="number" step="0.01" id="other_cost" name="other_cost" value="0" value="<?php echo $bill['other_cost']; ?>" required>
+                    <input type="number" step="0.01" id="other_cost" name="other_cost" value="<?php echo $bill['other_cost']; ?>" required>
 
                     <label for="bill_date">วันที่ออกบิล</label>
                     <input type="date" id="bill_date" name="bill_date" required value="<?php echo $bill['bill_date']; ?>">

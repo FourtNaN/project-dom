@@ -18,10 +18,6 @@
     <section class="row">
         <?php include("aside.php"); ?>
         <main class="col-9 col-xl-10 bg-white border border-5">
-
-
-
-
             <?php
             $today = date('Y-m-d');
             $room_number_from_url = isset($_GET['room_number']) ? $_GET['room_number'] : '';
@@ -30,17 +26,17 @@
                 $lname = $_POST['lname'];
                 $id_card_number = $_POST['id_card_number'];
                 $room_number = $_POST['room_number'];
+                $phone_number = $_POST['phone_number'];
+                $address_add = $_POST['address_add'];
+                $start_date = $_POST['start_date'];
 
-                // ตรวจสอบว่ามีการอัปโหลดรูปภาพ
-                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                if (isset($_FILES['contract']) && $_FILES['contract']['error'] === UPLOAD_ERR_OK) {
+                    $contract = file_get_contents($_FILES['contract']['tmp_name']);
+                    $stmt = $conn->prepare("INSERT INTO room_info (room_number, fname, lname, id_card_number, phone_number, address_add, contract, start_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssssss", $room_number, $fname, $lname, $id_card_number, $phone_number, $address_add, $contract, $start_date);
 
-                    // ป้องกัน SQL Injection โดยใช้ prepared statements
-                    $stmt = $conn->prepare("INSERT INTO room_info (room_number, fname, lname, id_card_number, image) VALUES (?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssi", $room_number, $fname, $lname, $id_card_number, $image);
 
                     if ($stmt->execute()) {
-                        // เปลี่ยนสถานะห้อง
                         $update_status_sql = "UPDATE rooms SET status = 'unavailable' WHERE room_number = '$room_number'";
                         if ($conn->query($update_status_sql) === TRUE) {
                             echo "<div class='alert alert-success'>บันทึกข้อมูลเรียบร้อยแล้ว และสถานะของห้องถูกเปลี่ยนเป็น 'ห้องเต็ม'</div>";
@@ -69,11 +65,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="id_card_number" class="form-label">เลขบัตรประชาชน</label>
-                        <input type="number" name="id_card_number" id="id_card_number" class="form-control" maxlength="13" required oninput='validateIDCard(this)'>
+                        <input type="text" name="id_card_number" id="id_card_number" class="form-control" maxlength="13" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">เบอร์โทรศัพท์</label>
-                        <input type="text" name="phone_number" id="phone_number" class="form-control" maxlength="12" required oninput="validatePhoneNumber(this)" placeholder="012-345-6789">
+                        <input type="tel" name="phone_number" id="phone_number" class="form-control" maxlength="10" required>
                     </div>
                     <div class="mb-3">
                         <label for="start_date" class="form-label">วันที่เริ่มเช่า</label>
@@ -98,8 +94,13 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">เอกสารสัญญา</label>
-                        <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                        <label for="address" class="form-label">ที่อยู่</label>
+                        <input type="text" name="address_add" id="address_add" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contract" class="form-label">เอกสารสัญญา</label>
+                        <input type="file" name="contract" id="contract" class="form-control" accept="image/*">
                     </div>
                     <div class="mb-3">
                         <label for="notes" class="form-label">หมายเหตุ</label>
@@ -109,38 +110,6 @@
                         <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
                     </div>
                 </form>
-                <script>
-                    function validateIDCard(input) {
-                        const idLength = input.value.length;
-
-                        if (idLength < 13) {
-                            input.setCustomValidity('กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก');
-                        } else if (idLength > 13) {
-                            input.setCustomValidity('กรุณากรอกเลขบัตรประชาชนไม่เกิน 13 หลัก');
-                        } else {
-                            input.setCustomValidity('');
-                        }
-                    };
-
-                    function validatePhoneNumber(input) {
-
-                        const cleanedInput = input.value.replace(/-/g, '');
-
-                        if (cleanedInput.length < 10) {
-                            input.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ให้ครบ 10 หลัก');
-                        } else if (cleanedInput.length > 10) {
-                            input.setCustomValidity('กรุณากรอกหมายเลขโทรศัพท์ไม่เกิน 10 หลัก');
-                        } else {
-                            input.setCustomValidity('');
-                        }
-
-                        // Format the input with dashes
-                        if (cleanedInput.length <= 10) {
-                            const formattedInput = cleanedInput.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-                            input.value = formattedInput.slice(0, 13);
-                        }
-                    }
-                </script>
             </div>
             <?php include 'footer.php' ?>
         </main>

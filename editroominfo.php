@@ -45,11 +45,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="fname" class="form-label">ชื่อ</label>
-                                <input type="text" name="fname" id="fname" class="form-control" value="<?php echo $row['fname']; ?>" required>
+                                <input type="text" name="fname" id="fname" class="form-control" maxlength="50" value="<?php echo $row['fname']; ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="lname" class="form-label">นามสกุล</label>
-                                <input type="text" name="lname" id="lname" class="form-control" value="<?php echo $row['lname']; ?>" required>
+                                <input type="text" name="lname" id="lname" class="form-control" maxlength="50" value="<?php echo $row['lname']; ?>" required>
                             </div>
                             <label for="phone_number" class="form-label">หมายเลขโทรศัพท์</label>
                             <input type="text" name="phone_number" id="phone_number" class="form-control" maxlength="10" required value="<?php echo $row['phone_number']; ?>">
@@ -58,8 +58,12 @@
                                 <input type="text" name="id_card_number" id="id_card_number" class="form-control" value="<?php echo $row['id_card_number']; ?>" maxlength="13" required>
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="form-label">เอกสารสัญญา</label>
-                                <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                                <label for="address" class="form-label">ที่อยู่</label>
+                                <input type="text" name="address_add" id="address_add" class="form-control" value="<?php echo $row['address_add'] ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contract" class="form-label">เอกสารสัญญา</label>
+                                <input type="file" name="contract" id="contract" class="form-control" accept="image/*">
                             </div>
                             <div class="d-flex justify-content-end align-items-end mt-3">
                                 <input type="submit" value="อัปเดตข้อมูล" class="btn btn-primary me-2 w-25">

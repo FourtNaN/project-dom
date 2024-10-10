@@ -102,19 +102,18 @@
         <main class="col-9 col-xl-10 bg-white border border-5">
 
             <div class="bg-white mb-5">
-                <div class="d-flex justify-content-between align-items-start mt-3">
 
+                <div class="d-flex justify-content-between align-items-start mt-3">
                     <a href="/problemTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none w-25 " style="width: 150px;">
                         <span class="material-symbols-outlined">arrow_back_ios</span>
                         ตารางแจ้งปัญหา
                     </a>
-
-
-                    <a href="/monthlybilltable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10 " style="width: 150px;">
-                        บิลรายเดือน
+                    <a href="/roomTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10 " style="width: 150px;">
+                        ตารางห้องพัก
                         <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </a>
                 </div>
+
                 <h1 class="prompt-bold text-custom-1 text-center">บิลห้อง</h1>
                 <?php
                 $sql =  "SELECT * FROM `bill` ";

@@ -104,19 +104,16 @@
             <div class="bg-white mb-5">
                 <div class="d-flex justify-content-between align-items-start mt-3">
 
-                    <a href="/billinfoTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none w-25 mt-2" style="width: 150px;">
+                    <a href="/roomTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none w-25 mt-2" style="width: 150px;">
                         <span class="material-symbols-outlined">arrow_back_ios</span>
-                        บิลรายเดือน
+                        ตารางห้องพัก
                     </a>
-
-
                     <a href="/problemTable.php" class="btn d-flex align-items-center fw-medium text-decoration-none gap-10 mt-2" style="width: 150px;">
-
                         ตารางแจ้งปัญหา
                         <span class="material-symbols-outlined">arrow_forward_ios</span>
                     </a>
                 </div>
-                <h1 class="prompt-bold text-custom-1 text-center">บิลห้อง</h1>
+                <h1 class="prompt-bold text-custom-1 text-center">บิลรายเดือน</h1>
                 <?php
                 $sql =  "SELECT * FROM `billing_info` ";
                 $result = mysqli_query($conn, $sql);
@@ -136,7 +133,7 @@
                     </thead>
                     <tbody>
                         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                            <tr>
+                            <tr onclick="goToEditPage('<?= htmlspecialchars($row['billing_date']); ?>')">
                                 <td class="border"><?php echo $row["electricity_total"] ?></td>
                                 <td class="border"><?php echo $row["water_total"] ?></td>
                                 <td class="border"><?php echo $row["other_charges"] ?></td>
@@ -151,9 +148,9 @@
                 <script>
                     $(document).ready(function() {
                         $('#billingTable').DataTable({
-                            "pageLength": 10, // กำหนดให้แสดง 10 แถวต่อหน้า
+                            "pageLength": 10,
                             "language": {
-                                "search": "ค้นหา:", // เปลี่ยนข้อความค้นหาเป็นภาษาไทย
+                                "search": "ค้นหา:",
                                 "lengthMenu": "แสดง _MENU_ แถวต่อหน้า",
                                 "info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
                                 "paginate": {
@@ -166,9 +163,8 @@
                         });
                     });
 
-                    function goToEditPage(roomNumber) {
-                        // เปลี่ยน URL ไปยังหน้าที่ต้องการ
-                        window.location.href = 'roombill.php?room_number=' + roomNumber;
+                    function goToEditPage(billing_date) {
+                        window.location.href = 'editmonthlybilltable.php?billing_date=' + billing_date;
                     }
                 </script>
             </div>

@@ -16,12 +16,109 @@ body {
   height: 200px; /* ความสูงของปุ่ม */
   text-align: center; /* จัดข้อความให้อยู่กลาง */
   margin: 10px; /* ระยะห่างระหว่างปุ่ม */
-  color: white; /* สีตัวอักษร */
+  color: black; /* สีตัวอักษร */
   text-decoration: none; /* ไม่มีขีดเส้นใต้ */
   border-radius: 10px; /* มุมโค้ง */
   font-size: 20px; /* ขนาดตัวอักษร */
   transition: background-color 0.3s, transform 0.3s; /* เพิ่มการเปลี่ยนแปลงในพื้นหลังและการขยาย */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้กับปุ่ม */
+  justify-content: space-between;
+}
+.room-buttonn {
+  display: inline-block; /* ทำให้ปุ่มเรียงกันในแถว */
+  text-decoration: none;
+  width: 250px; /* ความกว้างของปุ่ม */
+  height: 200px; /* ความสูงของปุ่ม */
+  align-self: center; /* จัดเรียงให้กลาง */
+  margin: 20px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+  padding: 16px 36px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: black;
+  box-shadow: #4e5d88;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.room-button svg {
+  position: absolute;
+  width: 24px;
+  fill: greenyellow;
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.room-button .arr-1 {
+  right: 16px;
+}
+
+.room-button .arr-2 {
+  left: -25%;
+}
+
+.room-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #d2c7e7;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.room-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.room-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #212121;
+  border-radius: 12px;
+}
+
+.room-button:hover .arr-1 {
+  right: -25%;
+}
+
+.room-button:hover .arr-2 {
+  left: 16px;
+}
+
+.room-button:hover .text {
+  transform: translateX(12px);
+}
+
+.room-button:hover svg {
+  fill: #212121;
+}
+
+.room-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px greenyellow;
+}
+
+.room-button:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}
+
+.button-55:focus {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+}
+.text-bottom {
+  margin-top: auto; /* เพิ่ม margin-top อัตโนมัติให้เลื่อนลง */
 }
 .room-button:hover {
   transform: scale(1.05); /* ขยายปุ่มเมื่อวางเมาส์ */
@@ -37,29 +134,13 @@ body {
 .red {
   background-color: red; /* สีพื้นหลังสำหรับสถานะไม่ว่าง */
 }
+.gray {
+  background-color: gray;
+}
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
-/* .sidebar-header {
-  display: flex;
-  align-items: center;
-}
-.sidebar-header-h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fff;
-  margin-left: 23px;
-} */
-/* .sidebar-links li a {
-  display: flex;
-  align-items: center;
-  gap: 0 20px;
-  color: #fff;
-  font-weight: 500;
-  padding: 15px 20px;
-  white-space: nowrap;
-  text-decoration: none;
-} */
+
 .sidebar-links li a:hover {
   background: #4e5d88; /* ใช้ rgba แทน O#ffffff2d */
   color: #fff; /* สีข้อความเมื่อ hover */

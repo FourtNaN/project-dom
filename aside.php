@@ -14,7 +14,12 @@
         </div>
         <ul class="sidebar-links list-unstyled ">
             <h4 class="text-custom-1 my-2 fs-5">เมนูหลัก</h4>
-
+            <li class="mb-2">
+                <a class="d-flex align-items-center fw-medium p-3 text-decoration-none text-custom-5 gap-2" href="/dashboard.php">
+                    <span class="material-symbols-outlined ">dashboard</span>
+                    dashboard
+                </a>
+            </li>
             <li class="mb-2">
                 <a class="d-flex align-items-center fw-medium p-3 text-decoration-none text-custom-5 gap-2" href="/index.php">
                     <span class="material-symbols-outlined ">nest_multi_room</span>
@@ -25,6 +30,12 @@
                 <a class="d-flex align-items-center fw-medium p-3 text-decoration-none text-custom-5 gap-2" href="/bill.php">
                     <span class="material-symbols-outlined">store</span>
                     ห้องบิล
+                </a>
+            </li>
+            <li class="mb-2">
+                <a class="d-flex align-items-center fw-medium p-3 text-decoration-none text-custom-5 gap-2" href="/addroomInvoice.php">
+                    <span class="material-symbols-outlined">print</span>
+                    พิมพ์บิลค่าห้อง
                 </a>
             </li>
             <li class="mb-2">

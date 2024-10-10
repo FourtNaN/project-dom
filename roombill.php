@@ -137,7 +137,7 @@
               <span class="fw-bold p-lg-5">สถานะ :</span>
               <span>
                 <?php
-                // กำหนดคลาสสำหรับปุ่มตามสถานะ
+
                 switch ($roww['payment_status']) {
                   case 'จ่ายแล้ว':
                     $btnClass = 'btn btn-success';
@@ -172,7 +172,7 @@
             </div>
           </div>
 
-          <!-- ฟอร์มอัปเดตสถานะ -->
+
           <form method="post" style="position: absolute; top: 10px; right: 10px; width: 150px;" id="statusForm">
             <label for="payment_status">สถานะ :</label>
             <select name="payment_status" id="payment_status" class="form-select" onchange="this.form.submit()">
@@ -190,23 +190,41 @@
       } else {
         echo "<div class='alert alert-danger text-center'>! ! ! ไม่พบข้อมูลบิลสำหรับห้องนี้ ! ! !</div>";
       }
-      // ปิดการเชื่อมต่อ
+
       $stmt_check->close();
       $conn->close();
-      ?>
+      ?><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
-        // ตั้งค่าให้ alert เลื่อนขึ้นและหายไปหลังจาก 2 วินาที
         setTimeout(function() {
           var alert = document.getElementById('myAlert');
-          alert.style.transition = "transform 1s ease, opacity 1s ease"; // ใช้ transition กับ transform และ opacity
-          alert.style.transform = "translateY(-20px)"; // เลื่อนขึ้น
-          alert.style.opacity = '0'; // ลดความโปร่งใส
+          alert.style.transition = "transform 1s ease, opacity 1s ease";
+          alert.style.transform = "translateY(-20px)";
+          alert.style.opacity = '0';
 
-          // ลบ alert ออกจาก DOM หลังจาก transition เสร็จ
+
           setTimeout(function() {
             alert.remove();
-          }, 1000); // ใช้เวลา 1 วินาทีในการลบออก
-        }, 2000); // รอ 2 วินาทีก่อนเริ่มเลื่อนขึ้น
+          }, 1000);
+        }, 2000);
+
+        function updateStatus(newStatus) {
+          $.ajax({
+            url: '',
+            type: 'POST',
+            data: {
+              room_number: '<?php echo $room_number; ?>',
+              payment_status: newStatus
+            },
+            success: function(response) {
+              // แสดงผลลัพธ์ใหม่
+              const result = JSON.parse(response);
+              $('#statusText').removeClass().addClass(result.btnClass).text(result.btnText);
+            },
+            error: function(xhr, status, error) {
+              console.error('เกิดข้อผิดพลาด:', error);
+            }
+          });
+        }
       </script>
       <?php include 'footer.php' ?>
     </main>

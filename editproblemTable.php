@@ -75,10 +75,10 @@
                                 <option value="กำลังดำเนินการ" <?= $row['status'] == 'กำลังดำเนินการ' ? 'selected' : ''; ?>>กำลังดำเนินการ</option>
                                 <option value="เสร็จสิ้น" <?= $row['status'] == 'เสร็จสิ้น' ? 'selected' : ''; ?>>เสร็จสิ้น</option>
                             </select>
-                            <button type="submit" class="btn btn-success w-100">แก้ไขข้อมูล</button>
-
-                            <a href="deleteproblem.php?room_number=<?php echo $row["room_number"] ?>" class="btn btn-danger w-100 mt-1" onclick="return confirm('คุณต้องการลบข้อมูลหรือไม่')">ลบข้อมูล</a>
-
+                            <div class="d-flex justify-content-end mt-3">
+                                <button type="submit" class="btn btn-success me-2" style="width: 150px;">แก้ไขข้อมูล</button>
+                                <a href="deleteproblem.php?room_number=<?php echo $row["room_number"] ?>" class="btn btn-danger" style="width: 150px;" onclick="return confirm('คุณต้องการลบข้อมูลหรือไม่')">ลบข้อมูล</a>
+                            </div>
                         </form>
                     </div>
 
